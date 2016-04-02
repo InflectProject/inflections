@@ -6,20 +6,27 @@
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/demo.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Inflect Demo</h2>
-    
-    <form method="POST" action="/handle">
-      <label for="word"></label>
-      <input name="word" type="text">
-      <input type="submit">
-    </form>
 
-    <% if defined? content %>
-      <h3>The response is <%= content %></h3>
-    <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-lg-offset-4">
+        <form method="POST" action="/handle">
+          <h2 >Inflect Demo</h2>
+          <label for="word" class="sr-only">Word</label>
+          <input name="word" type="text" class="form-control" placeholder="Word for search..." required autofocus>
+          <br>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
+        </form>
+
+        <% if defined? content %>
+          <h3>The response is <%= content %></h3>
+        <% end %>
+        
+      </div>
+    </div>
   </div>
 
   <!-- Latest compiled and minified JavaScript -->
