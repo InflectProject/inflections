@@ -3,13 +3,13 @@ require 'sinatra/reloader' if development?
 require 'inflect'
 require 'pry'
 
-get '/' do
-  erb :index
+get '/demo' do
+  erb :demo
 end
 
 post '/handle' do
   param = params['word'].upcase
   content = Inflect.handle([param]).content
 
-  erb :response, locals: { content: content }
+  erb :demo, locals: { content: content }
 end
