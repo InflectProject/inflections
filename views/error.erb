@@ -13,27 +13,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-4 col-lg-offset-4">
-        <form method="POST" action="/handle">
-          <h2 >Inflect Demo</h2>
-          <label for="word" class="sr-only">Word</label>
-          <input name="word" type="text" class="form-control" placeholder="Word for search..." required autofocus>
-          <br>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
-        </form>
-
-        <% if defined? content %>
-          <% if content.is_a? Hash %>
-            <h3><%= content[:title] %></h3>
-
-            <ul class="list-group">
-              <% content[:body].each do | item | %>
-              <li class="list-group-item"><%= item %></li>
-              <% end %>
-            </ul>
-          <% else %>
-            <h3>The response is <%= content %></h3>
-          <% end %>  
-        <% end %>
+        
+        <h3><%= error %></h3>
         
       </div>
     </div>
