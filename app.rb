@@ -1,4 +1,7 @@
 require 'sinatra'
+require 'dotenv'
+require 'pry'
+
 require 'sinatra/reloader' if development?
 require 'inflect'
 require 'pry'
