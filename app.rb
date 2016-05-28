@@ -14,10 +14,10 @@ end
 post '/handle' do
   param = params['word'].upcase
   begin
-    content = Inflect.handle([param]).content
+    inflection = Inflect.handle([param])
   rescue Exception => e
     erb :error, locals: { error: e.message }
   end
 
-  erb :demo, locals: { content: content }
+  erb :demo, locals: { inflection: inflection }
 end
