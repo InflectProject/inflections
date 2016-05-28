@@ -8,3 +8,4 @@ gem 'inflect', '~> 0.3.0'
 gem 'pry'
 
 gem 'twitter', '~> 5.16.0'
+gem 'forecast_io'
