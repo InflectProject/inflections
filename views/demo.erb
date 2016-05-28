@@ -26,7 +26,13 @@
 
             <ul class="list-group">
               <% inflection.content[:body].each do | item | %>
-              <li class="list-group-item"><%= item %></li>
+              <li class="list-group-item">
+                <% if item.is_a? Array %>
+                  <%= "#{item.shift}: #{item.shift}" %>
+                <% else %>
+                  <%= item %>
+                <% end %>
+              </li>
               <% end %>
             </ul>
           <% else %>

@@ -11,10 +11,7 @@ class WeatherService < Inflect::AbstractService
     @words    = %W[CLIMA]
     @title    = 'Clima'
   end
-
-  # This is method is the only one needed for Inflect to work.
-  # Implements how the service responds at the translated words.
-  # Returns a Inflect::Response with retrieved data.
+  
   # Returns:
   # 'currently': A data block (see below) containing the current weather conditions at the requested location.
   # 'hourly': A data block (see below) containing the weather conditions hour-by-hour for the next two days.
@@ -26,12 +23,23 @@ class WeatherService < Inflect::AbstractService
   def handle(words)
     ForecastIO.configure do |configuration|
       configuration.api_key = '7780ee7ace4bd1e611a540ea548373a5'
-      configuration.default_params = {units: 'auto', exclude:['flags','minutely'], lang:['es']}
+      configuration.default_params = {
+        units: 'auto', 
+        exclude: ['flags','minutely'], 
+        lang:['es']
+      }
     end
+    
     # units: auto ; selects units automatically, based on geographic location 
     forecast = ForecastIO.forecast(-34.9314, -57.9489)
+    
     # usage example. forecast.hourly.summary ; forecast.daily.summary
-    forecastSummary = [{currently: forecast.currently}, {hourly: forecast.hourly}, {daily: forecast.daily}]
+    forecastSummary = {
+      currently: forecast.currently.summary, 
+      hourly: forecast.hourly.summary, 
+      daily: forecast.daily.summary
+    }
+
     content  = { title: 'Clima', body: forecastSummary }
     respond content, { type: 'list' }
   end
