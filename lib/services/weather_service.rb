@@ -8,7 +8,7 @@ class WeatherService < Inflect::AbstractService
   # Float::Infinity is the lowest priority.
   def initialize
     @priority = 2
-    @words    = %W[WEATHER]
+    @words    = %W[CLIMA]
     @title    = 'Clima'
   end
 
