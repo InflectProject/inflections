@@ -12,7 +12,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-4 col-lg-offset-4">
+      <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
         <form method="POST" action="/handle">
           <h2 >Inflect Demo</h2>
           <label for="word" class="sr-only">Word</label>
@@ -22,7 +22,17 @@
         </form>
 
         <% if defined? content %>
-          <h3>The response is <%= content %></h3>
+          <% if content.is_a? Hash %>
+            <h3><%= content[:title] %></h3>
+
+            <ul class="list-group">
+              <% content[:body].each do | item | %>
+              <li class="list-group-item"><%= item %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <h3>The response is <%= content %></h3>
+          <% end %>  
         <% end %>
         
       </div>
