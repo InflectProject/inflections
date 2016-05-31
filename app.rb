@@ -7,6 +7,8 @@ require 'inflect'
 require 'pry'
 require 'json'
 
+# This is are the test routes for a more
+# graphical sample of the app's behaviour
 get '/demo' do
   erb :demo
 end
