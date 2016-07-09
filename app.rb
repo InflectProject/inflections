@@ -1,7 +1,7 @@
 require 'pry'
 require 'sinatra'
 require 'sinatra/json'
-require 'sinatra/reloader' if development?
+require 'sinatra/reloader'
 require 'dotenv'
 require 'inflect'
 require './helpers'
