@@ -21,7 +21,7 @@
           <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
         </form>
         <% if defined? inflection %>
-          <% if inflection.content.is_a? Hash %>
+          <% if list? inflection %>
             <h3><%= inflection.content[:title] %></h3>
 
             <ul class="list-group">
