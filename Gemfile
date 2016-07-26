@@ -9,3 +9,4 @@ gem 'pry'
 
 gem 'twitter', '~> 5.16.0'
 gem 'forecast_io'
+gem 'nokogiri'
