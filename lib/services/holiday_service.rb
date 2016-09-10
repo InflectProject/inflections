@@ -18,7 +18,7 @@ class HolidayService < Inflect::AbstractService
   # This is method is the only one needed for Inflect to work.
   # Implements how the service responds at the translated words.
   # Returns a Inflect::Response with retrieved data, .
-  def handle(words)
+  def default
     response = Net::HTTP.get(@base_url, '/API/v1/proximo')
     body     = JSON.parse(response)
 

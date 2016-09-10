@@ -13,13 +13,13 @@ class PharmaciesService < Inflect::AbstractService
     @priority = 1
     @words    = %W[FARMACIAS]
     @base_url = 'http://www.colfarmalp.org.ar/turnoslaplata.php'.freeze
-    @title    = 'Farmacias de Turno' 
+    @title    = 'Farmacias de Turno'
   end
 
   # This is method is the only one needed for Inflect to work.
   # Implements how the service responds at the translated words.
   # Returns a Inflect::Response with retrieved data.
-  def handle(words)
+  def default
     pharmacies=[]
     doc = Nokogiri::HTML(open(@base_url))
     doc.css('.ver_tu table tr:not([style])').each do |tr|
@@ -31,6 +31,6 @@ class PharmaciesService < Inflect::AbstractService
     end
     content  = { title: @title, body: pharmacies }
 
-    respond content, { type: 'list' } 
+    respond content, { type: 'list' }
   end
 end
