@@ -17,8 +17,8 @@ class UnclearService < Inflect::AbstractService
     true
   end
 
-  # Returns a Response Object with the key 
-  def handle(words)
+  # Returns a Response Object with the key
+  def default
     respond "No se encontró ningún servicio que responda a #{words.first.downcase}", {type: 'simple', status: 'not_found'}
   end
 end

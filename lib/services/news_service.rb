@@ -21,7 +21,7 @@ class NewsService < Inflect::AbstractService
   # This is method is the only one needed for Inflect to work.
   # Implements how the service responds at the translated words.
   # Returns a Inflect::Response with retrieved data.
-  def handle(words)
+  def default
     client = Twitter::REST::Client.new do |config|
       config.consumer_key        = "0EOMlVsBuU0VNShIxBpoobxhk"
       config.consumer_secret     = "e2JDYCId5uucBtgsCV5epvu5GO7vjSVrnFI1Lj0Z3SkWK0KJrV"
@@ -31,8 +31,31 @@ class NewsService < Inflect::AbstractService
 
     timeline = client.user_timeline(twitter_id)
     tweets   = timeline.map { |tweet| tweet.text }
-    content  = { title: 'Tweets del Diario Hoy', body: tweets }
+    binding.pry
+    content  = { title: 'Tweets del Diario Hoy', body: strip_urls(tweets) }
 
     respond content, { type: 'list' }
+  end
+
+  private
+
+  # Strip a url from a collection of tweets
+  # @param [Enumerable<String>] tweet
+  # @return [Enumerable<String>]
+  def strip_urls(tweets)
+    tweets.map { |tweet| strip_url(tweet) }
+  end
+
+  # Strip a url from a tweet
+  # @param [String] tweet
+  # @return [String]
+  def strip_url(tweet)
+    regex = 'https://'
+    current = tweet.rpartition(regex)
+
+    while current.include? regex
+      current = current.first.rpartition(regex)
+    end
+    current.last
   end
 end

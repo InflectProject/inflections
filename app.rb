@@ -6,6 +6,11 @@ require 'dotenv'
 require 'inflect'
 require './helpers'
 
+# set :public_folder, 'public'
+# get '/' do
+#   File.read('index.html')
+# end
+
 # This is are the test routes for a more
 # graphical sample of the app's behaviour
 get '/demo' do
