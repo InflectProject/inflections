@@ -31,7 +31,6 @@ class NewsService < Inflect::AbstractService
 
     timeline = client.user_timeline(twitter_id)
     tweets   = timeline.map { |tweet| tweet.text }
-    binding.pry
     content  = { title: 'Tweets del Diario Hoy', body: strip_urls(tweets) }
 
     respond content, { type: 'list' }
