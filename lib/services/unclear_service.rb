@@ -9,6 +9,7 @@ class UnclearService < Inflect::AbstractService
   # in the array.
   def initialize
     @priority = Float::INFINITY
+    @words   = %W[DESCONOCIDO]
   end
 
   # Overwrite #valid? method to be always valid
