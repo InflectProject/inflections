@@ -6,10 +6,11 @@ require 'dotenv'
 require 'inflect'
 require './helpers'
 
-# set :public_folder, 'public'
-# get '/' do
-#   File.read('index.html')
-# end
+set :public_folder, Proc.new { File.join(root, "dist") }
+
+get '/' do
+  File.read('dist/index.html')
+end
 
 # This is are the test routes for a more
 # graphical sample of the app's behaviour
