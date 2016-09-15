@@ -11,6 +11,11 @@ require './helpers'
 #   File.read('index.html')
 # end
 
+get '/wit/:message' do
+  response = Inflect.handle(['WIT', 'MESSAGE', params['message']])
+  json response.to_hash
+end
+
 # This is are the test routes for a more
 # graphical sample of the app's behaviour
 get '/demo' do
