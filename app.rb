@@ -6,10 +6,11 @@ require 'dotenv'
 require 'inflect'
 require './helpers'
 
-# set :public_folder, 'public'
-# get '/' do
-#   File.read('index.html')
-# end
+set :public_folder, Proc.new { File.join(root, "dist") }
+
+get '/' do
+  File.read('dist/index.html')
+end
 
 get '/wit/:message' do
   response = Inflect.handle(['WIT', 'MESSAGE', params['message']])
