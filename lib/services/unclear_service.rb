@@ -1,9 +1,18 @@
+require_relative '../utils/hash'
+
 class UnclearService < Inflect::AbstractService
-  attr_accessor :suggestions
+  using ::Utils::HashMethods
+
+  attr_accessor :answers
 
   def initialize
     @priority = Float::INFINITY
     @words   = %W[DESCONOCIDO]
+    @answers = [
+      { text: 'No te entendí, podrías repetirme?', allows_suggestion: false}, 
+      { text: 'No se cómo responder a eso :(', allows_suggestion: true } ,
+      { text: 'No me enseñaron a responder eso aún', allows_suggestion: true }
+    ]
   end
 
   # Overwrite #valid? method to be always valid
@@ -19,24 +28,17 @@ class UnclearService < Inflect::AbstractService
 
   private
 
-  def answers
-    [
-      'No te entendí, podrías repetirme?', 
-      'No se cómo responder a eso :(',
-      'No me enseñaron a responder eso aún'
-    ]
-  end
-
   def suggestions
-    service = services.find { |service| service.valid? ['PALABRAS'] }
-    service.key_words
+    Inflect.handle(['PALABRAS', 'CLAVE']).content[:words]
   end
 
-  def random_service
+  def random_suggestion
     suggestions[rand(suggestions.size)]
   end
 
   def random_answer
-    answers[rand(answers.size)]
+    answer = answers[rand(answers.size)].deep_dup
+    answer[:text] << ", prueba diciendo '#{random_suggestion.downcase}'" if answer[:allows_suggestion]
+    answer
   end
 end
