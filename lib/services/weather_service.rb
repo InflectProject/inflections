@@ -37,7 +37,7 @@ class WeatherService < Inflect::AbstractService
     forecastSummary = {
       currently: forecast.currently.summary,
       hourly: forecast.hourly.summary,
-      daily: forecast.daily.summary
+      daily: forecast.daily
     }
 
     content  = { title: 'Clima', body: forecastSummary }
