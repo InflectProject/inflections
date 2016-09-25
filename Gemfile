@@ -11,3 +11,5 @@ gem 'twitter', '~> 5.16.0'
 gem 'forecast_io'
 gem 'nokogiri'
 gem 'wit'
+gem "sinatra-cross_origin", "~> 0.3.1"
+

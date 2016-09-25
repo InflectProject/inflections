@@ -6,6 +6,12 @@ require 'dotenv'
 require 'inflect'
 require './helpers'
 
+require 'sinatra/cross_origin'
+
+configure do
+  enable :cross_origin
+end
+
 set :public_folder, Proc.new { File.join(root, "dist") }
 
 get '/' do
