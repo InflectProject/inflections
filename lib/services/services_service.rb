@@ -1,17 +1,24 @@
 class ServicesService < Inflect::AbstractService
-	def initialize
-	  @priority = 1
-	  @words   = %W[PALABRAS]
-	end
+  def initialize
+    @priority = 1
+    @words   = %W[PALABRAS CLAVE]
+  end
 
-	def default
-	  respond words: all_words
-	end
+  def default
+    respond words: all_words
+  end
 
-	private
+  def clave
+    respond words: key_words
+  end
 
-	def all_words
+  private
 
-	  services.collect { |service| service.words }.flatten
-	end
+  def all_words
+    services.collect { |service| service.words }.flatten
+  end
+
+  def key_words
+    services.collect { |service| service.words.first }.flatten
+  end
 end

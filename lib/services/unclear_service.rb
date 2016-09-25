@@ -1,12 +1,6 @@
 class UnclearService < Inflect::AbstractService
-  # A WORDS Array constant with the key words of the Service.
-  # @example Array for New York Times service
-  #   words = %W[ NEWS TODAY NEW\ YORK\ TIMES]
+  attr_accessor :suggestions
 
-  # In case there are modules that provide similar contents the
-  # one with most PRIORITY is picked.
-  # Float::Infinity is set so it will always be the last service
-  # in the array.
   def initialize
     @priority = Float::INFINITY
     @words   = %W[DESCONOCIDO]
@@ -20,6 +14,29 @@ class UnclearService < Inflect::AbstractService
 
   # Returns a Response Object with the key
   def default
-    respond "No se encontró ningún servicio que responda a #{words.first.downcase}", {type: 'simple', status: 'not_found'}
+    respond random_answer, {type: 'simple', status: 'not_found'}
+  end
+
+  private
+
+  def answers
+    [
+      'No te entendí, podrías repetirme?', 
+      'No se cómo responder a eso :(',
+      'No me enseñaron a responder eso aún'
+    ]
+  end
+
+  def suggestions
+    service = services.find { |service| service.valid? ['PALABRAS'] }
+    service.key_words
+  end
+
+  def random_service
+    suggestions[rand(suggestions.size)]
+  end
+
+  def random_answer
+    answers[rand(answers.size)]
   end
 end
