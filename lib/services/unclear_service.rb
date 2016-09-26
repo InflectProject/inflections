@@ -39,6 +39,6 @@ class UnclearService < Inflect::AbstractService
   def random_answer
     answer = answers[rand(answers.size)].deep_dup
     answer[:text] << ", prueba diciendo '#{random_suggestion.downcase}'" if answer[:allows_suggestion]
-    answer
+    answer[:text]
   end
 end

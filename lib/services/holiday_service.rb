@@ -10,7 +10,7 @@ class HolidayService < Inflect::AbstractService
   # Float::Infinity is the lowest priority.
   def initialize
     @priority = 1
-    @words    = %W[FERIADO]
+    @words    = %W[FERIADOS PROXIMOS]
     @title    = 'Proximo Feriado'
     @base_url  = 'nolaborables.com.ar'.freeze
   end
@@ -25,5 +25,27 @@ class HolidayService < Inflect::AbstractService
     content  = { 'title': @title, 'body': body }
 
     respond content
+  end
+
+  def proximos
+    response = Net::HTTP.get(@base_url, '/API/v1/actual')
+    body = JSON.parse(response)
+
+    days = filter_days(filter_months body)
+    content = { days: days.first(5) }
+
+    respond  content, {type: 'list'}
+  end
+
+  private
+
+  def filter_months(days)
+    today = Date.today
+    days.find_all { |day| day["mes"] >= today.month }
+  end
+
+  def filter_days(days)
+    today = Date.today
+    days.reject { |day| day["mes"].eql? today.month && day["dia"] < today.day }
   end
 end
