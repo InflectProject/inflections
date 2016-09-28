@@ -8,9 +8,9 @@ require './helpers'
 
 require 'sinatra/cross_origin'
 
-configure do
-  enable :cross_origin
-end
+#configure do
+#  enable :cross_origin
+#end
 
 set :public_folder, Proc.new { File.join(root, "dist") }
 
@@ -41,6 +41,7 @@ post '/handle' do
 end
 
 post '/inflect' do
+  cross_origin
   words = params['words'].map(&:upcase)
   inflections = Inflect.handle(words)
 
