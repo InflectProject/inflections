@@ -42,7 +42,7 @@ end
 
 post '/inflect' do
   cross_origin
-  words = params['words'].map(&:upcase)
+  words = JSON.parse(request.body.read)['words'].map(&:upcase)
   inflections = Inflect.handle(words)
 
   json inflections.to_hash
