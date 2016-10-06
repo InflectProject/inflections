@@ -8,9 +8,16 @@ require './helpers'
 
 require 'sinatra/cross_origin'
 
-#configure do
-#  enable :cross_origin
-#end
+#http://stackoverflow.com/a/4352077/4317329
+before do
+  if request.request_method == 'OPTIONS'
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "POST"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Accept, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+
+    halt 200
+  end
+end
 
 set :public_folder, Proc.new { File.join(root, "dist") }
 

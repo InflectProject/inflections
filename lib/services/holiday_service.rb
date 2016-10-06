@@ -32,7 +32,7 @@ class HolidayService < Inflect::AbstractService
     body = JSON.parse(response)
 
     days = filter_days(filter_months body)
-    content = { days: days.first(5) }
+    content = { body: days.first(5) }
 
     respond  content, {type: 'list'}
   end
