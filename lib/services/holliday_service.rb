@@ -21,7 +21,7 @@ class HollidayService < Inflect::AbstractService
   def default
     response = Net::HTTP.get(@base_url, '/API/v1/proximo')
     body     = JSON.parse(response)
-    binding.pry
+    
     content  = { 'title': @title, 'body': body }
 
     respond content
